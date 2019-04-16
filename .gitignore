@@ -2,3 +2,4 @@ Notebook/
 .ipynb_checkpoints/
 test2.jpg
 adt.jpg
+__pycache__/
