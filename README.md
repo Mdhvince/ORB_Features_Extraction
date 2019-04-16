@@ -9,8 +9,8 @@ See the result <a href="https://www.instagram.com/p/BvjrjKhIUgL/">here</a>
 
 ## File Description
 - haarcascade_frontalface_default.xml: Cascade file for detecting the face part before recognition 
-- orb.py: orb algorithm for recognition
-- preliminary.ipynb: test for detecting keypoints in image
+- orb.py: orb algorithm for face recognition in real time
+- Notebook_PDF/preliminary.pdf: test for detecting keypoints in image (PDF version of a Notebook)
 
 ## Authors
 Medhy Vinceslas
