@@ -3,6 +3,7 @@ import numpy as np
 
 
 training_image = cv2.imread('test2.jpg')
+training_image = cv2.resize(training_image, (200,300))
 training_gray = cv2.cvtColor(training_image, cv2.COLOR_BGR2GRAY)
 
 cap = cv2.VideoCapture(0)
@@ -12,15 +13,15 @@ while(True):
 	ret, query_image = cap.read()
 	query_gray = cv2.cvtColor(query_image, cv2.COLOR_BGR2GRAY)
 
-	#path_front = "haarcascade_frontalface_alt2.xml"
-	#face_cascade = cv2.CascadeClassifier(path_front)
+	path_front = "haarcascade_frontalface_default.xml"
+	face_cascade = cv2.CascadeClassifier(path_front)
 
-	#faces = face_cascade.detectMultiScale(query_gray, scaleFactor=1.10,
-		#minNeighbors=5, minSize=(40,40))
+	faces = face_cascade.detectMultiScale(query_gray, scaleFactor=1.10,
+		minNeighbors=5, minSize=(40,40))
 
-	#for (x, y, w, h) in faces:
+	for (x, y, w, h) in faces:
 		# Cropped part of the video analyzed under the hood
-		#query_gray = query_gray[y-25:y+h+25, x-10:x+w+10]
+		query_gray = query_gray[y-25:y+h+25, x-10:x+w+10]
 
 	# Set the parameters of the ORB algorithm by specifying the maximum number of keypoints to locate and
 	# the pyramid decimation ratio
@@ -45,8 +46,7 @@ while(True):
 	# The best matches correspond to the first elements in the sorted matches list, since they are the ones
 	# with the shorter distance. We draw the first 300 mathces and use flags = 2 to plot the matching keypoints
 	# without size or orientation.
-	result = cv2.drawMatches(training_gray, keypoints_train, query_gray, keypoints_query, matches[:10], query_gray, flags = 2)
-
+	result = cv2.drawMatches(training_gray, keypoints_train, query_gray, keypoints_query, matches[:100], query_gray, flags = 2)
 	
 
 	# Print the number of keypoints detected in the training image
@@ -62,7 +62,7 @@ while(True):
 
 
 	cv2.imshow("Matching", result)
-	cv2.imshow("Frame", query_image)
+	#cv2.imshow("Frame", query_image)
 
 	ch = cv2.waitKey(1)
 	# quite the loop if I tape on the letter q
